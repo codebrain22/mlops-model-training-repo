@@ -1,0 +1,10 @@
+scikit-learn
+xgboost
+pandas
+pyarrow
+pytest
+category_encoders
+requests
+google-cloud-storage
+google-cloud-bigquery
+dill

@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/cloud-machine-learning-467110/bank-campaign-model', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/cloud-machine-learning-467110/bank-campaign-model']
+
+- name: 'gcr.io/cloud-machine-learning-467110/bank-campaign-model'
+  entrypoint: 'bash'
+  args:
+   - '-c'
+   - |
+      python -m pytest
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/codebrain22/mlops-model-training-repo.git']
+
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'mlops-model-training-repo/bank_campaign_model_training.py', 'gs://us-central1-mlops-airflow-50fbf87d-bucket/dags']
