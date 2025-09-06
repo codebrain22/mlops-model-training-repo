@@ -1,0 +1,4 @@
+# Add entries, e.g.:
+.ipynb_checkpoints/
+*.pyc
+__pycache__/
