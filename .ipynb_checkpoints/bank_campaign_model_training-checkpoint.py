@@ -44,6 +44,7 @@ def apply_bucketing(df):
     df['pdays_bucketed'] = df['pdays'].apply(bucket_pdays)
     df = df.drop('pdays', axis=1)
     df = df.drop('duration', axis=1)
+    
     return df
 
 def train_model(model_name, x_train, y_train):
@@ -65,6 +66,7 @@ def train_model(model_name, x_train, y_train):
 def get_classification_report(pipeline, X_test, y_test):
     y_pred = pipeline.predict(X_test)
     report = classification_report(y_test, y_pred,output_dict=True)
+    
     return report
 
 def save_model_artifact(model_name,pipeline):
@@ -77,6 +79,7 @@ def save_model_artifact(model_name,pipeline):
 def load_model_artifact(file_name):
     blob = bucket.blob("ml-artifacts/" + file_name)
     blob.download_to_filename(file_name)
+    
     return load(file_name)
 
 def write_metrics_to_bigquery(algo_name, training_time, model_metrics):
