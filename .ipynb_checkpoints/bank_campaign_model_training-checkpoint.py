@@ -14,7 +14,7 @@ from google.cloud import bigquery
 from datetime import datetime
 
 storage_client = storage.Client()
-bucket = storage_client.bucket("sid-ml-ops")
+bucket = storage_client.bucket("km-ml-ops")
 
 def load_data(path):
     return pd.read_csv(path,sep=";")
@@ -93,7 +93,7 @@ def write_metrics_to_bigquery(algo_name, training_time, model_metrics):
         print("Error inserting metrics into BigQuery:", errors)
 
 def main():
-    input_data_path = "gs://sid-ml-ops/bank_campaign_data/bank-additional.csv"
+    input_data_path = "gs://km-ml-ops/bank_campaign_data/bank-additional.csv"
     model_name='xgboost'
     df = load_data(input_data_path)
     categorical_cols = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'day_of_week', 'poutcome']
